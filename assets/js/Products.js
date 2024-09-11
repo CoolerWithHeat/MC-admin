@@ -7,9 +7,9 @@ function openEditMode(product_id, updated_data=null){
   edit_mode = true
   if (product_id){
     current_product = product_id
-    console.log(product_id)
     const product = updated_data || getProduct(product_base, product_id);
     if (isObject(product)){
+      SetMenuHeader(product.title)
       setInputStructure(true, product)
       shutProductsList()
     }
@@ -101,6 +101,18 @@ function GetBrand(selected_brand=null){
   return '';
 }
 
+function SyncProduct(product_id){
+  if (typeof product_id == 'number'){
+    ShowMessage('warning', 'Synchronizing...')
+    const doAfter = (response)=>{
+      if(response){
+        ShowMessage('success', 'Done!')
+      }
+    };
+    MakeRequest(`reindex-product/${product_id}/`, null, 'POST', doAfter)
+  }
+};
+
 function setInputStructure(edit_mode=false, data=null){
   const structureWindow = document.getElementById('FieldWindow');
   const title = edit_mode && data ? data.title : '';
@@ -109,9 +121,18 @@ function setInputStructure(edit_mode=false, data=null){
   const reducedBy = edit_mode && data ? data.discount_amount : '';
   const description = edit_mode && data ? data.description : '';
   const has_reviewers = edit_mode && data ? data.has_reviewers || false : false;
+  const algolia_sync = edit_mode ? `<img src="assets/images/algolia.png"><a onclick="SyncProduct(${data.id});" href="javascript:void(0);" class="main-btn primary-btn btn-hover">Sync With Algolia</a>` : '';
   const delete_button = `
     <div style="width:100%; height:50px; display:flex; justify-content:right;">
       <a onclick="ShowWarning(DeleteProduct);" href="javascript:void(0);" class="main-btn danger-btn square-btn btn-hover">Delete</a>
+    </div>
+    <br>
+  `;
+  const sync_button = `
+    <div style="width:100%; height:50px; display:flex; justify-content:right;">
+    <div style="display:flex; width:100%; height:100%; justify-content:right;">
+      ${algolia_sync}
+    </div>
     </div>
     <br>
   `;
@@ -143,6 +164,8 @@ function setInputStructure(edit_mode=false, data=null){
       <textarea id="product-description" placeholder="Product Description" rows="5" required>${description}</textarea>
     </div>
     <!-- field 5 -->
+    <div style="width: 170px;"><a onclick="fetchProductMeta(${current_product})" class="main-btn dark-btn-outline btn-hover">Configure Meta<i class="lni lni-plus"></i></a></div>
+    <hr>
     <h2>Colors</h2>
     <hr>
     <div>
@@ -201,6 +224,7 @@ function setInputStructure(edit_mode=false, data=null){
         <label class="form-check-label" for="toggleSwitch1">Has reviewers</label>
       </div>
       ${(edit_mode && current_product) ? delete_button : ''}
+      ${(edit_mode && current_product) ? sync_button : ''}
       <a href="javascript:void(0);" onclick="ValidateData();" class="main-btn secondary-btn-outline btn-hover">Save</a>
   `;
   if (structureWindow){
@@ -295,6 +319,7 @@ const platform_indecies = {
   }
 
 function FetchAllProducts(){
+  SetMenuHeader('Products')
   edit_mode = false
   current_product = 0;
   const placeProducts = (response)=>{

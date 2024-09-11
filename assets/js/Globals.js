@@ -1,5 +1,5 @@
 // const host = window.location.protocol + "//" + window.location.host + '/serverdestination';
-const host_itself = 'http://192.168.1.103/'
+const host_itself = 'http://192.168.180.22/'
 const host = 'http://127.0.0.1:8000/serverdestination/'
 
 const admin_token = localStorage.getItem('MC-admin')
@@ -29,6 +29,13 @@ function RemovePreviousMessage(message_id){
     message.classList.add('fadeaway')
   }
 };
+
+function SetMenuHeader(text=null){
+  const header = document.getElementById('MenuHeader');
+  if (header && text){
+    header.textContent = text;
+  }
+}
 
 function HandleAfterVerification(){
   if(typeof currentOperation === 'function'){currentOperation(); ShowWarning(null, true)}
