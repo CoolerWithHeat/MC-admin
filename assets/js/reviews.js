@@ -8,17 +8,19 @@ function ListReviews(reviewsList=[]){
                 <img style="width: 45px; height: 45px;" src="assets/images/reviews.png" alt="">
               </div>
               <div class="card-content">
-                <h4><a>By ${review_author}</a></h4>
-                <small style="font-size:9px;">${customer_location}</small>
+                <h4><a>By ${review_author || ''}</a></h4>
+                <div style="height:25px;">
+                  <small style="font-size:9px;">${customer_location || ''}</small>
+                </div>
                 <div style="border-left:solid; border-bottom:solid; border-width:1px;">
-                  <p style="padding:1px;">${review_text}</p>
+                  <p style="padding:1px;">${review_text || ''}</p>
                 </div>
                 <hr>
                 <div><p style="font-size:12px;">For product: <a style="font-size:13px;" href="https://massagechairsmarket.com/Buy/${product_details.id}/">${product_details.title}</a></p></div>
                 <div style="display:flex; justify-content:right;">
-                  <a onclick="DeleteReview(${review_id})" style="width:40px; height:30px;" href="javascript:void(0);" class="main-btn danger-btn square-btn btn-hover">Remove</a>
+                  <a onclick="ShowWarning(()=>DeleteReview(${review_id}))" style="width:40px; height:30px;" href="javascript:void(0);" class="main-btn danger-btn square-btn btn-hover">Remove</a>
                 </div>
-                <small style="font-size:9px;">Rating: ${customer_rating}</small>
+                <small style="font-size:9px;">Rating: ${customer_rating || ''}</small>
               </div>
             </div>
           </div>

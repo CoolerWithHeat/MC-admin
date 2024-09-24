@@ -1440,6 +1440,7 @@ h6,
 }
 .card-style-5 .card-content {
   margin-bottom: 10px;
+  min-width: 100%;
 }
 .card-style-5 .card-content h4 a {
   color: inherit;
@@ -5981,6 +5982,51 @@ label[for=file] {
   cursor: pointer;
 }
 
+label[for=leftImage] {
+  display: grid;
+  grid-auto-flow: column;
+  grid-gap: 0.5em;
+  justify-items: center;
+  align-content: center;
+  border: 0.1em solid #565656;
+  background: whitesmoke;
+  padding: 0.85em 1.5em;
+  color: black;
+  border-radius: 1em;
+  transition: 1s;
+  cursor: pointer;
+}
+
+label[for=rightImage] {
+  display: grid;
+  grid-auto-flow: column;
+  grid-gap: 0.5em;
+  justify-items: center;
+  align-content: center;
+  border: 0.1em solid #565656;
+  background: whitesmoke;
+  padding: 0.85em 1.5em;
+  color: black;
+  border-radius: 1em;
+  transition: 1s;
+  cursor: pointer;
+}
+
+label[for=mobileImage] {
+  display: grid;
+  grid-auto-flow: column;
+  grid-gap: 0.5em;
+  justify-items: center;
+  align-content: center;
+  border: 0.1em solid #565656;
+  background: whitesmoke;
+  padding: 0.85em 1.5em;
+  color: black;
+  border-radius: 1em;
+  transition: 1s;
+  cursor: pointer;
+}
+
 label[for=LogoPoint] {
   display: grid;
   grid-auto-flow: column;
@@ -6290,7 +6336,7 @@ label[for=VideoShowcaseInput]{
   #warningAction{
     width: 45%; 
     height: 40%; 
-    background-color: #dc3545!important; 
+    background-color: rgba(220, 53, 69, 0.9) !important; 
     display: flex; 
     justify-content: center;
     border-radius: 17px;
@@ -6357,3 +6403,31 @@ label[for=VideoShowcaseInput]{
   display: flex;
   justify-content: left;
 };
+
+#ProductListWindow{
+  opacity: 0;
+}
+
+#FieldWindow{
+  opacity: 0;
+}
+
+@keyframes fadeIn {
+  from {
+      opacity: 0;
+  }
+  to {
+      opacity: 1;
+  }
+}
+
+.animatedAppear {
+  animation: fadeIn 0.5s ease-in forwards;
+}
+
+
+.card-content p{
+  height: 50px;
+  overflow-y: scroll;
+  font-size: 12px;
+}

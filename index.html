@@ -95,6 +95,26 @@
             </a>
           </li>
           <li class="nav-item">
+            <a href="javascript:void(0);" onclick="OpenWindow(13);">
+              <span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="19" height="17" fill="currentColor" class="bi bi-gift" viewBox="0 0 16 16">
+                  <path d="M3 2.5a2.5 2.5 0 0 1 5 0 2.5 2.5 0 0 1 5 0v.006c0 .07 0 .27-.038.494H15a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1v7.5a1.5 1.5 0 0 1-1.5 1.5h-11A1.5 1.5 0 0 1 1 14.5V7a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h2.038A3 3 0 0 1 3 2.506zm1.068.5H7v-.5a1.5 1.5 0 1 0-3 0c0 .085.002.274.045.43zM9 3h2.932l.023-.07c.043-.156.045-.345.045-.43a1.5 1.5 0 0 0-3 0zM1 4v2h6V4zm8 0v2h6V4zm5 3H9v8h4.5a.5.5 0 0 0 .5-.5zm-7 8V7H2v7.5a.5.5 0 0 0 .5.5z"/>
+                </svg>
+              </span>
+              <span class="text">Special Offers</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="javascript:void(0);" onclick="OpenWindow(12);">
+              <span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="19" height="18" fill="currentColor" class="bi bi-currency-dollar" viewBox="0 0 16 16">
+                  <path d="M4 10.781c.148 1.667 1.513 2.85 3.591 3.003V15h1.043v-1.216c2.27-.179 3.678-1.438 3.678-3.3 0-1.59-.947-2.51-2.956-3.028l-.722-.187V3.467c1.122.11 1.879.714 2.07 1.616h1.47c-.166-1.6-1.54-2.748-3.54-2.875V1H7.591v1.233c-1.939.23-3.27 1.472-3.27 3.156 0 1.454.966 2.483 2.661 2.917l.61.162v4.031c-1.149-.17-1.94-.8-2.131-1.718zm3.391-3.836c-1.043-.263-1.6-.825-1.6-1.616 0-.944.704-1.641 1.8-1.828v3.495l-.2-.05zm1.591 1.872c1.287.323 1.852.859 1.852 1.769 0 1.097-.826 1.828-2.2 1.939V8.73z"/>
+                </svg>
+              </span>
+              <span class="text">Price Management</span>
+            </a>
+          </li>
+          <li class="nav-item">
             <a href="javascript:void(0);" onclick="OpenWindow(4);">
               <span class="icon">
                 <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" fill="currentColor" class="bi bi-bag" viewBox="0 0 16 16">
@@ -207,40 +227,7 @@
                 </div>
               </div>
               <!-- my code !!!!!!!!!!!!!!!!!!!!! -->
-              <div id="ProductListWindow">
-                <label for="product-meta_description">Meta Description</label>
-                <div class="input-style-2">
-                  <input data-field_name="meta_description" value="${meta_description || ''}" id="product-meta_description" type="text" placeholder="Meta Description " required/>
-                </div>
-                <label for="product-meta_keywords">Comma Seperated Keywords</label>
-                <div class="input-style-2">
-                  <input data-field_name="meta_keywords" value="${meta_keywords || ''}" id="product-meta_keywords" type="text" placeholder="Meta Keywords " required/>
-                </div>
-                <hr>
-                <h3>Social Media Params ↓</h3>
-                <hr>
-                <label for="product-meta_keywords">Open Graph Title</label>
-                <div class="input-style-2">
-                  <input data-field_name="og_title" value="${og_title || ''}" id="product-og_title" type="text" placeholder="Open Graph Title " required/>
-                </div>
-                <label for="product-og_image">Open Graph Image</label>
-                <div class="input-style-2">
-                  <div style="width: 100%; height: 150px; border-style: solid; display: flex; justify-content: left; flex-wrap: wrap;"></div>
-                </div>
-                <label for="product-og_url">Open Graph Url</label>
-                <div class="input-style-2">
-                  <input data-field_name="og_url" value="${og_url || ''}" id="product-og_url" type="text" placeholder="Open Graph Url " required/>
-                </div>
-                <div class="select-style-1">
-                  <label>Open Graph Type</label>  
-                  <div class="select-position">
-                    <select id="product-og_type" data-field_name="og_type">
-                      <option value="product">Product</option>
-                      <option value="blog">Blog</option>
-                    </select>
-                  </div>
-                </div>
-              </div>
+              <div id="ProductListWindow"></div>
               <div id="FieldWindow"></div>
               <!-- my code end !!!!!!!!!!!!!!!!!!!! -->
               <!-- end col -->
@@ -305,7 +292,9 @@
     <script src="assets/js/Inquiries.js"></script>
     <script src="assets/js/FAQs.js"></script>
     <script src="assets/js/MetaData.js"></script>
-    <script>
+    <script src="assets/js/PriceManagement.js"></script>
+    <script src="assets/js/SpecialEvent.js"></script>
+    <script>      
       function onMobile() {return window.innerWidth < 460;}
       function closeSideBar() {document.getElementById('menu-toggle').click(); document.getElementById('MainContentParent').classList.remove('active')}
       const sidebarIsOpen = ()=>document.getElementById('SidebarHeader').className.includes('active');
@@ -321,6 +310,8 @@
         9: getReviews,
         10: FetchAllQuestions,
         11: GetFAQs,
+        12: PlacePricingBar,
+        13: GetSpecialEvent,
       }
       const MenuHeaders = {
         1: 'Brands',
@@ -334,11 +325,24 @@
         9: 'Reviews',
         10: 'Inquiries',
         11: 'FAQs',
+        12: 'Price Management',
+        13: 'Special Offer',
       }
       const SideBySideView = (enable=true) =>{
         const requestedWindow = document.getElementById('ProductListWindow');
         if (enable && requestedWindow){requestedWindow.classList.add('MoreInOne')}
         else{requestedWindow.classList.remove('MoreInOne')}
+      };
+
+      const AnimateWindows = ()=>{
+        const window1 = document.getElementById('ProductListWindow');
+        const window2 = document.getElementById('FieldWindow');
+        window1.classList.remove('animatedAppear');
+        window2.classList.remove('animatedAppear');
+        setTimeout(() => {
+            window1.classList.add('animatedAppear');
+            window2.classList.add('animatedAppear');
+        }, 50);
       };
 
       function OpenWindow(window_id){
@@ -353,6 +357,7 @@
           collable();
           localStorage.setItem('lastTab', window_id)
         }
+        AnimateWindows();
       }
       const lastInteraction = JSON.parse(localStorage.getItem('lastTab')) || 8;
       OpenWindow(lastInteraction);

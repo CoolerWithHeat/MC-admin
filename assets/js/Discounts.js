@@ -133,10 +133,11 @@ function listDiscounts(discounts=[]){
   const Discountswindow = document.getElementById('ProductListWindow');
   const structure = (Discount)=> `
       <div class="col-xl-4 col-lg-6 col-12 productCardSided">
-        <div class="card-style-5 mb-30">
+        <div style="min-height:175px;" class="card-style-5 mb-30">
           <div class="card-content">
             <h4>${GetDiscountData(Discount).amount} discount</h4>
-            <small>${GetDiscountData(Discount).text}</small>  
+            <small>${GetDiscountData(Discount).text}</small>
+            <div style="min-width:100%; border-top:solid; border-color:#FFBF00	;"></div>
             <a style="float:right;" class="main-btn primary-btn btn-hover" onclick="editDiscount(${GetDiscountData(Discount).id})">Change</a>
           </div>
         </div>
